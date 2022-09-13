@@ -12,6 +12,10 @@
 | last_name_kana     | string  | null: false               |
 | first_name_kana    | string  | null: false               |
 
+### Association
+- has_many :items
+- has_many :
+
 ## items テーブル
 
 | Column      | Type       | Options                        |
@@ -20,6 +24,10 @@
 | description | text       | null: false                    |
 | price       | integer    | null: false                    |
 | user        | references | null: false, foreign_key: true |
+
+### Association
+- belongs_to :user
+- has_one :order
 
 ## orders テーブル
 
@@ -32,3 +40,7 @@
 | phone_number    | string     | null: false                    |
 | user            | references | null: false, foreign_key: true |
 | item            | references | null: false, foreign_key: true |
+
+### Association
+- belongs_to :user
+- has_one :item
