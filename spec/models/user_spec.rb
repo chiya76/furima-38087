@@ -120,12 +120,27 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
 
-      it 'passwordは英数字が1文字ずつ含まれていないと登録できない' do
+      it 'passwordが数字のみでは登録できない' do
         @user.password = '111111'
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+        expect(@user.errors.full_messages).to include('Password Include both half-width letters and numbers')
       end
+
+      it 'passwordが英字のみでは登録できない' do
+        @user.password = 'aaaaaa'
+        @user.password_confirmation = @user.password
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password Include both half-width letters and numbers')
+      end
+
+      it 'passwordが全角を含んでいると登録できない' do
+        @user.password = '1aaaaあ'
+        @user.password_confirmation = @user.password
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password Include both half-width letters and numbers')
+      end
+
     end
   end
 end
