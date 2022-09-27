@@ -86,7 +86,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが10000000以上では登録できない' do
-        @item.price = Faker::Number.between(from: 10000000, to: 99999999)
+        @item.price = Faker::Number.between(from: 10_000_000, to: 99_999_999)
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be half-width numbers between 300 and 9999999')
       end
