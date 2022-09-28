@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  belongs_to :user, optional: true
+  belongs_to :user
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -20,5 +20,5 @@ class Item < ApplicationRecord
   validates :days_to_ship_id, numericality: { other_than: 1, message: "can't be blank" }
 
   validates :price, presence: true, format: { with: /\A[0-9]+\z/ },
-                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'must be half-width numbers between 300 and 9999999' }
+                    numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'must be half-width integer between 300 and 9999999' }
 end
