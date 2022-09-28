@@ -82,20 +82,27 @@ RSpec.describe Item, type: :model do
       it 'priceが299以下では登録できない' do
         @item.price = Faker::Number.between(from: 1, to: 299)
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be half-width numbers between 300 and 9999999')
+        expect(@item.errors.full_messages).to include('Price must be half-width integer between 300 and 9999999')
       end
 
       it 'priceが10000000以上では登録できない' do
         @item.price = Faker::Number.between(from: 10_000_000, to: 99_999_999)
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be half-width numbers between 300 and 9999999')
+        expect(@item.errors.full_messages).to include('Price must be half-width integer between 300 and 9999999')
       end
 
       it 'priceが全角では登録できない' do
         @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be half-width numbers between 300 and 9999999')
+        expect(@item.errors.full_messages).to include('Price must be half-width integer between 300 and 9999999')
       end
+
+      it 'ユーザーが紐付いていなければ投稿できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
+      
     end
   end
 end
