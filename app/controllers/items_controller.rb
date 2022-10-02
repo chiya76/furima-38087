@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+
   def index
     @items = Item.order('created_at DESC')
   end
@@ -8,6 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def create
+    before_action :authenticate_user!
     @item = Item.new(item_params)
 
     if @item.save
