@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :move_to_index, only: :index
   before_action :ordered_item, only: :index
-  before_action :set_item, only: [index, create, ]
+  before_action :set_item, only: [:index, :create]
 
   def index
     @order_address = OrderAddress.new
