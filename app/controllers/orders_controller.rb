@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
   end
 
   def ordered_item
-    redirect_to root_path if @item.orders.present?
+    redirect_to root_path if @item.order.present?
   end
 
   def set_item
