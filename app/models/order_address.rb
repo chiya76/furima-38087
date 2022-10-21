@@ -8,7 +8,7 @@ class OrderAddress
     validates :user_id, :item_id, :municipality, :address
     validates :phone_number, format: { with: /\d{10,11}/, message: 'is invalid' }, length: { maximum: 11, message: 'is invalid' }
   end
-  validates :prefecture, numericality: { other_than: 0, message: "can't be blank" }
+  validates :prefecture, numericality: { other_than: 1, message: "can't be blank" }
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
