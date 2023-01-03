@@ -15,6 +15,6 @@ module Furima38087
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    config.hosts << 'xxx.onrender.com'
+    config.hosts << '54.95.57.92'
   end
 end
